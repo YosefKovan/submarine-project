@@ -12,7 +12,6 @@ def create_matrix(size, fill):
 #           in bounds
 #===============================
 def in_bounds(n, x, y):
-
      return 0 < x < n and 0 < y < n
 
 #===============================
@@ -31,11 +30,33 @@ def count_remaining_ships(ships, shots):
 
 
 #===============================
+#         get character
+#===============================
+def get_character(ships, shots, row, col):
+
+    if shots[row][col] and ships[row][col] == 0:
+        return 'X'
+    elif shots[row][col] and ships[row][col] == 1:
+        return 'V'
+    elif not shots[row][col]:
+        return 'O'
+
+
+#===============================
 #         render public
 #===============================
-def render_public():
-    pass
+def render_public(ships, shots):
 
+    return_string = ""
+
+    for row in range(len(ships)):
+        for col in range(len(ships[row])):
+             character = get_character(ships, shots, row, col)
+             return_string += f"{character} "
+
+        return_string += '\n'
+
+    return return_string
 #===============================
 #         render reveal
 #===============================
