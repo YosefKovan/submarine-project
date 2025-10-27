@@ -16,7 +16,10 @@ def get_random_cell(min_cell, max_cell):
 def place_random_ships(ships, amount_of_ships):
     """this function will place the ships randomly"""
 
-    while amount_of_ships > 0:
-        row, col = get_random_cell(min, max)
-        ships[row][col] = 1
+    added = set()
 
+    while amount_of_ships > 0:
+
+        row, col = get_random_cell(min, max)
+        if (row, col) not in added:
+           ships[row][col] = 1

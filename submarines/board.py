@@ -27,6 +27,7 @@ def count_remaining_ships(ships, shots):
 
     return count
 
+
 #===============================
 #         get character
 #===============================
