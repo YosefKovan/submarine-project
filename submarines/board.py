@@ -1,4 +1,3 @@
-
 #===============================
 #         create matrix
 #===============================
@@ -6,7 +5,7 @@ def create_matrix(size, fill):
     """this function will create a matrix - default value is 0"""
 
     #using list comprehension
-    return [fill for j in range(size) for i in range(size)]
+    return [[fill for j in range(size)] for i in range(size)]
 
 #===============================
 #           in bounds
@@ -28,7 +27,6 @@ def count_remaining_ships(ships, shots):
 
     return count
 
-
 #===============================
 #         get character
 #===============================
@@ -41,7 +39,6 @@ def get_character(ships, shots, row, col):
     elif not shots[row][col]:
         return 'O'
 
-
 #===============================
 #         render public
 #===============================
@@ -50,13 +47,14 @@ def render_public(ships, shots):
     return_string = ""
 
     for row in range(len(ships)):
-        for col in range(len(ships[row])):
+        for col in range(len(ships)):
              character = get_character(ships, shots, row, col)
              return_string += f"{character} "
 
         return_string += '\n'
 
     return return_string
+
 #===============================
 #         render reveal
 #===============================
