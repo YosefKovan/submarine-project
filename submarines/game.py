@@ -1,4 +1,4 @@
-from submarines.board import create_matrix, in_bounds
+from submarines.board import create_matrix, in_bounds, render_public
 from submarines.placement import place_random_ships
 
 #==============================
@@ -30,18 +30,17 @@ def shoot(game_data, row, col):
     #this will return the result of the successful hit (did it hit a ship or not)
     return handle_successful_shot(game_data, row, col)
 
-
 #==============================
 #         player won
 #==============================
-def player_won():
-    pass
+def player_won(game_data):
+    return remaining_ships(game_data) == 0 and shots_left(game_data) > 0
 
 #==============================
 #         player lost
 #==============================
-def player_lost():
-    pass
+def player_lost(game_data):
+    return remaining_ships(game_data) > 0 and shots_left(game_data) == 0
 
 #==============================
 #         shots left
@@ -66,10 +65,10 @@ def remaining_ships(game_data):
 #==============================
 #          init_game
 #==============================
-def init_game(size, ships, max_shots, amount_of_ships):
+def init_game(size, ships, max_shots):
 
     ship_matrix = create_matrix(size, 0)
-    place_random_ships(ship_matrix, amount_of_ships)
+    place_random_ships(ship_matrix, ships)
 
     game_data = {
         "size" : size,
@@ -84,14 +83,12 @@ def init_game(size, ships, max_shots, amount_of_ships):
 #==============================
 #         play game
 #==============================
-def play_game():
+def play_game(size, ships, max_shots, amount_of_ships):
 
-    game_over = False
+    game_data = init_game(size, ships, max_shots, amount_of_ships)
 
-    game_data = init_game()
-
-    while not player_won() or player_lost():
-        pass
+    while not player_won(game_data) or player_lost(game_data):
+        render_public(game_data["ships"], game_data["shots"])
 
 
 
